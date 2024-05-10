@@ -21,7 +21,7 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "s223064279@deakin.edu.au",
+                    mail to: "meetkagalwala9@gmail.com",
                     subject: "test status email",
                     body: "Test is completed"
                 }
@@ -39,7 +39,7 @@ pipeline{
             }
             post{
                 success{
-                    mail to: "s223064279@deakin.edu.au",
+                    mail to: "meetkagalwala9@gmail.com",
                     subject: "security scan stage ${currentBuild.result}",
                     body: "security scan completed"
                 }
