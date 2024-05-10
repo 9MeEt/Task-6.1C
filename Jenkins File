@@ -1,16 +1,19 @@
 pipeline {
     agent any
+
     environment {
         DIRECTORYPATH = "DIRECTORY_PATH"
         TESTINGENVIRONMENT = "TESTING_ENVIRONMENT"
         PRODUCTIONENVIRONMENT = "Meet Kagalwala"
     }
+
     stages {
         stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/9MeEt/Task-6.1C.git'
             }
         }
+
         stage('Build') {
             steps {
                 echo "Fetch the source code from the ${DIRECTORYPATH}"
@@ -18,6 +21,7 @@ pipeline {
                 echo "The code is built using the built automation tool named John"
             }
         }
+
         stage('Unit and Integration Tests') {
             steps {
                 echo "Unit tests"
@@ -26,41 +30,46 @@ pipeline {
             }
             post {
                 success {
-                    mail to: "s2230642792deakin.edu.au",
-                    subject: "Test status email",
-                    body: "Test is completed"
+                    mail to: "s223064279@deakin.edu.au",
+                         subject: "Test status email",
+                         body: "Test is completed"
                 }
             }
         }
+
         stage('Code Analysis') {
             steps {
                 echo "Check the quality of the code"
                 echo "SonarQube was used as a tool"
             }
         }
+
         stage('Security Scan') {
             steps {
                 echo "Veracode used for security scan"
             }
             post {
                 success {
-                    mail to: "s2230642792deakin.edu.au",
-                    subject: "Security scan stage ${currentBuild.result}",
-                    body: "Security scan completed"
+                    mail to: "s223064279@deakin.edu.au",
+                         subject: "Security scan stage ${currentBuild.result}",
+                         body: "Security scan completed"
                 }
             }
         }
+
         stage('Deploy to Staging') {
             steps {
                 echo "In Jenkins-deploy the application to a staging server"
             }
         }
-        stage ('Integration Tests on Staging') {
+
+        stage('Integration Tests on Staging') {
             steps {
                 echo "Run the integration tests on the staging environment to ensure the application functions as expected in a production-like environment"
             }
         }
-        stage ('Deploy to Production') {
+
+        stage('Deploy to Production') {
             steps {
                 echo "DEPLOY the code to ${PRODUCTIONENVIRONMENT}"
                 echo "Deploy the application to a production server"
